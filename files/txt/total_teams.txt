@@ -1,0 +1,16 @@
+
+	Pakistan		WestIndies
+	Ireland			England
+	SouthAfrica		Zimbabwe
+	Afghanistan		Bangladesh
+	Srilanka		Australia
+	NewZealand		India
+
+#Note:
+***********************************************************************
+
+These are the Full Member Teams of ICC.
+We will just use these teams in our whole program.
+As custom teams are not allowed so please enter the names of teams
+from upper given list and enter spellings carefully.
+-----------------------------------------------------------------------
