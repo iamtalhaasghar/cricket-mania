@@ -8,6 +8,7 @@ In this project, we have developed an algorithm in Cpp for calculating "Target S
 2. Junaid Nawab
 3. Zain Ul Abideen
 4. Abdul Basit Chaudhry
+5. Raheel Abbas
 
 # 1st Position in ESPICE, KFUEIT RYK
 1. https://www.kfueit.edu.pk/first-exhibition-of-semester-projects-in-computer-engineering-espice
