@@ -5,11 +5,12 @@
 
 // libraries used in this source file
 #include<iostream>
-#include<conio.h>
+//#include<conio.h>
+#include <ncurses.h>
 #include<string>
 #include<stdlib.h>
 #include<iomanip>
-#include<Windows.h>
+//#include<Windows.h>
 
 using namespace std;
 
@@ -42,7 +43,7 @@ void bmi(string players[],int size)
 		cout <<"Calculating BMI of (Player#"<<i+1<<")  \" "<< players[i] <<" \" :  ";
 		
 		// if user pressed the key 'e' then exit from loop
-		if(_getch()=='e')
+		if(getch()=='e')
 		{
 			cout<<"Exiting BMI!";
 			goto END;				// exiting from the for loop
@@ -59,7 +60,7 @@ MASS_M:	cin >> weight;
 		{
 			// if user enters wrong number prompt an error message
 
-			MessageBox(0,"Error! \"Mass\" is never nagative or zero.", "Wrong Mass", MB_OK );
+			//MessageBox(0,"Error! \"Mass\" is never nagative or zero.", "Wrong Mass", MB_OK );
 			goto MASS_M;   // go and get the value of mass again
 		}
 
@@ -85,7 +86,7 @@ MASS_U:	cin	>> w;
 		{
 			// if incorrect number is entered prompt an error message
 
-			MessageBox(0,"Error! Incorrect unit of \"mass\" was entered. ", "Wrong Mass", MB_OK );
+			//MessageBox(0,"Error! Incorrect unit of \"mass\" was entered. ", "Wrong Mass", MB_OK );
 			goto MASS_U;
 		
 		}
@@ -102,7 +103,7 @@ HEIGHT_M:
 		{
 			// if wrong height is entered prompt an error message
 
-			MessageBox(0,"Error! \"Height\" is never nagative or zero.", "Wrong Height", MB_OK );
+			//MessageBox(0,"Error! \"Height\" is never nagative or zero.", "Wrong Height", MB_OK );
 			goto HEIGHT_M;
 		}
 
@@ -136,7 +137,7 @@ HEIGHT_U:
 		{
 			// else prompt an error message on wrong entry of unit
 
-			MessageBox(0,"Warning! Incorrect units of \"height\" was entered.", "Wrong Height", MB_OK );
+			//MessageBox(0,"Warning! Incorrect units of \"height\" was entered.", "Wrong Height", MB_OK );
 			goto HEIGHT_U;
 		}
 

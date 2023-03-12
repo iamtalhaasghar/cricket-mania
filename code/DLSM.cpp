@@ -11,11 +11,12 @@
 
 
 #include<iostream>
-#include<conio.h>
+//#include<conio.h>
+#include<ncurses.h>
 #include<string>
 #include<iomanip>
 #include<fstream>
-#include<Windows.h>
+//#include<Windows.h>
 
 
 using namespace std;
@@ -72,7 +73,7 @@ double target(double r1, double r2, double s , double g)
 		
 		else			// else as the resources are equal there is no need of revised target 
 		{
-			MessageBox(0,"As Both teams have equal resources there is no need to calculate the revised target.", "Target", MB_OK );
+			//MessageBox(0,"As Both teams have equal resources there is no need to calculate the revised target.", "Target", MB_OK );
 			result=s+1;
 		}
 
@@ -136,7 +137,7 @@ double resource_table( int overs , int wickets )
 			// if file does not opens print error message
 
         cout<<"Error in opening file.\"DSLM_Table_O.txt\"";
-        _getch();
+        getch();
 		return 0;
     }
 

@@ -10,11 +10,16 @@
 
 #pragma comment(lib, "winmm.lib")			// library to play the sound
 #include<iostream>							
-#include<conio.h>					
+//#include<conio.h>					
+#include<ncurses.h>
 #include<iomanip>							// libray for input and output manipulation
 #include<ctime>								// library to determine the current time and date
 #include<string>							// libraries to use string classes
-#include<Windows.h>							// library "Windows.h"
+//#include<Windows.h>							// library "Windows.h"
+
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -74,7 +79,7 @@ void score_card(string teamA ,string teamB, int total_overs )
 
 
 			
-			a=_getch();				// get choice of user
+			a=getch();				// get choice of user
 
 		// switch statement to do an action as user presses the button
 
@@ -145,8 +150,8 @@ void score_card(string teamA ,string teamB, int total_overs )
 				
 								// play sound "four.wav" for boundary
 
-				PlaySound(TEXT("four.wav"), NULL, SND_FILENAME | SND_ASYNC);
-				Sleep(5000);
+				//PlaySound(TEXT("four.wav"), NULL, SND_FILENAME | SND_ASYNC);
+				usleep(5000);
 
 				break;
 			
@@ -166,8 +171,8 @@ void score_card(string teamA ,string teamB, int total_overs )
 
 									// play sound "six.wav" when a six is scored
 				
-				PlaySound(TEXT("six.wav"), NULL, SND_FILENAME | SND_ASYNC);				
-				Sleep(7000);
+				//PlaySound(TEXT("six.wav"), NULL, SND_FILENAME | SND_ASYNC);				
+				usleep(7000);
 
 
 				break;
@@ -188,8 +193,8 @@ void score_card(string teamA ,string teamB, int total_overs )
 
 							// play sound "wicket.wav" when a player is out
 
-				PlaySound(TEXT("wicket.wav"), NULL, SND_FILENAME | SND_ASYNC);
-				Sleep(10500);
+				//PlaySound(TEXT("wicket.wav"), NULL, SND_FILENAME | SND_ASYNC);
+				usleep(10500);
 
 				break;
 			
@@ -201,10 +206,10 @@ void score_card(string teamA ,string teamB, int total_overs )
 				score1++;
 				extra1++;
 							// play sound for no ball
-				PlaySound(TEXT("noball.wav"), NULL, SND_FILENAME | SND_ASYNC);
+				//PlaySound(TEXT("noball.wav"), NULL, SND_FILENAME | SND_ASYNC);
 							// prompt a message showing "free hit"
-				MessageBox(0,"NO BALL! Free Hit!!!", "Team2", MB_OK );
-				Sleep(10000);				
+				//MessageBox(0,"NO BALL! Free Hit!!!", "Team2", MB_OK );
+				usleep(10000);				
 				break;
 			
 			}
@@ -214,7 +219,7 @@ void score_card(string teamA ,string teamB, int total_overs )
 			{
 				// prompt the warning message
 
-				MessageBox(0,"Caution! You are leaving your innings!\n This may affect the overall result of the match.", "Team 1 Skips", MB_OK );			
+				//MessageBox(0,"Caution! You are leaving your innings!\n This may affect the overall result of the match.", "Team 1 Skips", MB_OK );			
 				goto TEAMB;	
 			}
 			
@@ -245,10 +250,11 @@ void score_card(string teamA ,string teamB, int total_overs )
 
 				// prompt a warning message before exiting scorecard
 
-				MessageBox(0,"Caution! You are leaving the match!\n It will be counted as your defeat.", "Team 1 leaves", MB_OK );			
+				//MessageBox(0,"Caution! You are leaving the match!\n It will be counted as your defeat.", "Team 1 leaves", MB_OK );			
 				cout<<"\nMatch is terminated by \" "<<teamA<<" \".\n";
 				cout<<"\n \" "<<teamB<<" \" wins.\n\n";
-				goto END;		// goto label "END" which marks end of program
+                // todo: you can't jump before to a label which haven't yet been created
+				//goto END;		// goto label "END" which marks end of program
 			}
 
 
@@ -256,7 +262,7 @@ void score_card(string teamA ,string teamB, int total_overs )
 			{
 				// prompt a warning message
 
-				MessageBox(0,"Error! Invalid Key is pressed.", "Scorecard Team1", MB_OK );
+				//MessageBox(0,"Error! Invalid Key is pressed.", "Scorecard Team1", MB_OK );
 				break;
 			}
 			
@@ -326,7 +332,7 @@ TEAMB:
 		{
 			// prompt a message showing that they are winners
 
-			MessageBox(0,"Team 2 has won the match!!!", "Team 2 Wins!", MB_OK );
+			//MessageBox(0,"Team 2 has won the match!!!", "Team 2 Wins!", MB_OK );
 			cout<<"\n\" "<<teamB<<" \""<<" has won the match by \' "<<10-wicket2<<" \' wickets !\n";
 			goto END;		// and goto lable "END" which marks the end of program
 		
@@ -342,7 +348,7 @@ TEAMB:
 			{
 				// print message showing that the match has been counted as Draw
 
-				MessageBox(0,"No one wins!!!", "Match Draw!", MB_OK );			
+				//MessageBox(0,"No one wins!!!", "Match Draw!", MB_OK );			
 				cout<<"\n Match is Over without any result.\n";			
 				goto END;
 			}
@@ -353,7 +359,7 @@ TEAMB:
 			{
 				// print message showing that team 1 has won the match
 
-				MessageBox(0,"Team 1 has won the match!!!", "Team 1 Wins!", MB_OK );			
+				//MessageBox(0,"Team 1 has won the match!!!", "Team 1 Wins!", MB_OK );			
 				cout<<"\n\" "<<teamA<<" \""<<" has won the match by \' "<<score1-score2<<" \' runs !\n";			
 				goto END;
 			}
@@ -363,7 +369,7 @@ TEAMB:
 		
 		// getting the choice of user
 
-		a=_getch();
+		a=getch();
 					
 		
 		// switch statement to do an action as user presses the button
@@ -434,8 +440,8 @@ TEAMB:
 				}
 				
 									// play sound "four.wav" for boundary
-				PlaySound(TEXT("four.wav"), NULL, SND_FILENAME | SND_ASYNC);
-				Sleep(5000);
+				//PlaySound(TEXT("four.wav"), NULL, SND_FILENAME | SND_ASYNC);
+				usleep(5000);
 
 				break;
 			
@@ -454,8 +460,8 @@ TEAMB:
 				}
 
 								// play sound "six.wav" when a six is scored
-				PlaySound(TEXT("six.wav"), NULL, SND_FILENAME | SND_ASYNC);				
-				Sleep(7000);
+				//PlaySound(TEXT("six.wav"), NULL, SND_FILENAME | SND_ASYNC);				
+				usleep(7000);
 				break;
 			
 			}
@@ -473,8 +479,8 @@ TEAMB:
 				}
 
 						// play sound "wicket.wav" when a player is out
-				PlaySound(TEXT("wicket.wav"), NULL, SND_FILENAME | SND_ASYNC);
-				Sleep(10500);
+				//PlaySound(TEXT("wicket.wav"), NULL, SND_FILENAME | SND_ASYNC);
+				usleep(10500);
 				break;
 			
 			}
@@ -486,13 +492,13 @@ TEAMB:
 				extra2++;
 
 						// play sound for no ball
-				PlaySound(TEXT("noball.wav"), NULL, SND_FILENAME | SND_ASYNC);
+				//PlaySound(TEXT("noball.wav"), NULL, SND_FILENAME | SND_ASYNC);
 
 				// prompt a message showing "free hit"
-				MessageBox(0,"NO BALL! Free Hit!!!", "Team1", MB_OK );
+				//MessageBox(0,"NO BALL! Free Hit!!!", "Team1", MB_OK );
 				
 
-				Sleep(10000);								
+				usleep(10000);								
 				break;
 			
 			}
@@ -527,7 +533,7 @@ TEAMB:
 				
 				// prompt a warning message before exiting scorecard
 
-				MessageBox(0,"Caution! You are leaving the match!\n  It will be counted as your defeat.", "Team 2 leaves", MB_OK );			
+				//MessageBox(0,"Caution! You are leaving the match!\n  It will be counted as your defeat.", "Team 2 leaves", MB_OK );			
 				cout<<"\nMatch is terminated by \" "<<teamB<<" \".\n";
 				cout<<"\n \" "<<teamA<<" \" wins.\n\n";
 				goto END;			// goto label "END" which marks end of program
@@ -540,7 +546,7 @@ TEAMB:
 
 					// prompt a warning message
 
-				MessageBox(0,"Error! Invalid Key is pressed.", "Scorecard Team2", MB_OK );
+				//MessageBox(0,"Error! Invalid Key is pressed.", "Scorecard Team2", MB_OK );
 				break;
 			}
 			
@@ -551,9 +557,10 @@ TEAMB:
 		
 	}							// end of 2nd while loop
 	
-END:	cout<<"\nThe Match is concluded !";			// end of program
+END:	
+    cout<<"\nThe Match is concluded !";			// end of program
 
-	_getch();
+	getch();
 }						// end of function "scorecard"
 
 

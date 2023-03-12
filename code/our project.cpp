@@ -20,13 +20,17 @@
 
 #pragma comment(lib, "winmm.lib")	
 #include<iostream>						// input, output stream
-#include<conio.h>						
+//#include<conio.h>						
+#include<ncurses.h>
 #include<iomanip>						// input, output manipulator
 #include<stdlib.h>						// c-standard library
 #include<string>						// libray to handle "stirngs"
 #include<fstream>						// library "filestream" to handle files
-#include<Windows.h>						// library "Windows.h"
+//#include<Windows.h>						// library "Windows.h"
 
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 
 /*
@@ -75,7 +79,7 @@ void score_card(string teamA ,string teamB, int total_overs );
 
 inline void cls(void)
 {
-	_getch();
+	getch();
 	system("cls");
 
 
@@ -84,7 +88,8 @@ inline void cls(void)
 
 //	>	Global variables
 
-const int size=11;					// constant integer named as "size" & initialized to value "11"  
+//const int size=11;					// constant integer named as "size" & initialized to value "11"  
+#define size 11
 
 
 int main()							// defination of function "main"
@@ -135,7 +140,7 @@ int main()							// defination of function "main"
 			cout<<"\n\n> Please Enter name of two Teams : \n";
 	
 			total_teams();
-//			Sleep(4000);
+//			usleep(4000);
 
 			
 			cout<<"\nTeam1 : \t";
@@ -144,7 +149,7 @@ TEAM1:		cin>>team1;
 			if(check_team(team1)==0)
 			{
 			
-				MessageBox(0,"Error! No such team is available.", "Incorrect Team1", MB_OK );
+				//MessageBox(0,"Error! No such team is available.", "Incorrect Team1", MB_OK );
 				goto TEAM1;
 			
 			
@@ -155,7 +160,7 @@ TEAM2:		cin>>team2;
 
 			if( (check_team(team2)==0) || team2==team1 )
 			{
-				MessageBox(0,"Error! This team has already been selected or is not available.", "Incorrect Team2", MB_OK );
+				//MessageBox(0,"Error! This team has already been selected or is not available.", "Incorrect Team2", MB_OK );
 				goto TEAM2;
 			
 			}
@@ -222,7 +227,7 @@ MATCH:		system("cls");
 				cin>>N;
 				if( N>=50 || N<=0 || N==10 || N==20 )
 				{
-					MessageBox(0,"Invalid Custom Match!.", "Custom Match", MB_OK );
+					//MessageBox(0,"Invalid Custom Match!.", "Custom Match", MB_OK );
 					goto MATCH;		//line 85
 				}
 						
@@ -232,7 +237,7 @@ MATCH:		system("cls");
 				
 			else
 			{
-				MessageBox(0,"Error! No such match type is available.", "Match Selection", MB_OK );
+				//MessageBox(0,"Error! No such match type is available.", "Match Selection", MB_OK );
 				goto MATCH;		//line 85
 				
 			}
@@ -256,7 +261,7 @@ COIN_FACE:	system("cls");
 
 			if (!( coin_face=="head" || coin_face=="tail" ))
 			{
-				MessageBox(0,"Error! Select \"head\"or \"tail\"", "Coin Face", MB_OK );
+				//MessageBox(0,"Error! Select \"head\"or \"tail\"", "Coin Face", MB_OK );
 				goto COIN_FACE;	
 			}
 			
@@ -265,13 +270,13 @@ COIN_FACE:	system("cls");
 			
 			if( coin_face=="head")
 			{
-				PlaySound(TEXT("head.wav"), NULL, SND_FILENAME | SND_ASYNC);				
-				Sleep(4000);
+				//PlaySound(TEXT("head.wav"), NULL, SND_FILENAME | SND_ASYNC);				
+				usleep(4000);
 			}
 			else
 			{
-				PlaySound(TEXT("tail.wav"), NULL, SND_FILENAME | SND_ASYNC);				
-				Sleep(4000);
+				//PlaySound(TEXT("tail.wav"), NULL, SND_FILENAME | SND_ASYNC);				
+				usleep(4000);
 			
 			
 			}
@@ -282,13 +287,13 @@ COIN_FACE:	system("cls");
 							
 
 			cout<<"\n\nPress any key to throw the coin.... ";
-			PlaySound(TEXT("throw_coin.wav"), NULL, SND_FILENAME | SND_ASYNC);				
-			Sleep(4000);
+			//PlaySound(TEXT("throw_coin.wav"), NULL, SND_FILENAME | SND_ASYNC);				
+			usleep(4000);
 			
 			getch();
 
-			PlaySound(TEXT("toss.wav"), NULL, SND_FILENAME | SND_ASYNC);
-			Sleep(5500);
+			//PlaySound(TEXT("toss.wav"), NULL, SND_FILENAME | SND_ASYNC);
+			usleep(5500);
 						
 			toss_decision( toss(coin_face,team1,team2) , team1 ,team2 )  ;
 
@@ -340,7 +345,7 @@ COIN_FACE:	system("cls");
 					cin>>over;
 					if	( over > N || over<0 )
 					{
-						MessageBox(0,"Error! Incorrect \"Overs\" Entered! ", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Incorrect \"Overs\" Entered! ", "Type 1", MB_OK );
 					}
 				}while( over > N || over<0 );
 				
@@ -353,7 +358,7 @@ COIN_FACE:	system("cls");
 					cin>> wickets;
 					if	( wickets >= 10 || wickets < 0 )
 					{
-						MessageBox(0,"Error! Incorrect \"Wickets\" Entered! ", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Incorrect \"Wickets\" Entered! ", "Type 1", MB_OK );
 					}
 				}while( wickets >= 10 || wickets < 0 );
 
@@ -365,7 +370,7 @@ COIN_FACE:	system("cls");
 					cin>>overs_lost;
 					if	( overs_lost<0 || overs_lost>(N-over) )
 					{
-						MessageBox(0,"Error! Incorrect \"Overs Lost\" Entered! ", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Incorrect \"Overs Lost\" Entered! ", "Type 1", MB_OK );
 					}
 				}while( overs_lost<0 || overs_lost>(N-over) );
 
@@ -377,7 +382,7 @@ COIN_FACE:	system("cls");
 					cin>>S;
 					if	( S<0 )
 					{
-						MessageBox(0,"Error! Score can never be negative.", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Score can never be negative.", "Type 1", MB_OK );
 					}
 				}while( S<0 );
 			
@@ -417,7 +422,7 @@ COIN_FACE:	system("cls");
 					cin>>overs_lost;
 					if	( overs_lost<0 || overs_lost>(N-over) )
 					{
-						MessageBox(0,"Error! Incorrect \"Overs Lost\" Entered! ", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Incorrect \"Overs Lost\" Entered! ", "Type 1", MB_OK );
 					}
 				}while( overs_lost<0 || overs_lost>(N-over) );
 
@@ -427,7 +432,7 @@ COIN_FACE:	system("cls");
 					cin>>S;
 					if	( S<0 )
 					{
-						MessageBox(0,"Error! Score can never be negative.", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Score can never be negative.", "Type 1", MB_OK );
 					}
 				}while( S<0 );
 
@@ -459,7 +464,7 @@ COIN_FACE:	system("cls");
 					cin>>over;
 					if	( over > N || over<0 )
 					{
-						MessageBox(0,"Error! Incorrect \"Overs\" Entered! ", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Incorrect \"Overs\" Entered! ", "Type 1", MB_OK );
 					}
 				}while( over > N || over<0 );
 			
@@ -469,7 +474,7 @@ COIN_FACE:	system("cls");
 					cin>> wickets;
 					if	( wickets >= 10 || wickets < 0 )
 					{
-						MessageBox(0,"Error! Incorrect \"Wickets\" Entered! ", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Incorrect \"Wickets\" Entered! ", "Type 1", MB_OK );
 					}
 				}while( wickets >= 10 || wickets < 0 );
 
@@ -479,7 +484,7 @@ COIN_FACE:	system("cls");
 					cin>>overs_lost;
 					if	( overs_lost<0 || overs_lost>(N-over) )
 					{
-						MessageBox(0,"Error! Incorrect \"Overs Lost\" Entered! ", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Incorrect \"Overs Lost\" Entered! ", "Type 1", MB_OK );
 					}
 				}while( overs_lost<0 || overs_lost>(N-over) );
 
@@ -490,7 +495,7 @@ COIN_FACE:	system("cls");
 					cin>>S;
 					if	( S<0 )
 					{
-						MessageBox(0,"Error! Score can never be negative.", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Score can never be negative.", "Type 1", MB_OK );
 					}
 				}while( S<0 );
 
@@ -525,7 +530,7 @@ COIN_FACE:	system("cls");
 					cin>>over;
 					if	( over > N || over<0 )
 					{
-						MessageBox(0,"Error! Incorrect \"Overs\" Entered! ", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Incorrect \"Overs\" Entered! ", "Type 1", MB_OK );
 					}
 				}while( over > N || over<0 );
 
@@ -536,7 +541,7 @@ COIN_FACE:	system("cls");
 					cin>> wickets;
 					if	( wickets >= 10 || wickets < 0 )
 					{
-						MessageBox(0,"Error! Incorrect \"Wickets\" Entered! ", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Incorrect \"Wickets\" Entered! ", "Type 1", MB_OK );
 					}
 				}while( wickets >= 10 || wickets < 0 );
 
@@ -547,7 +552,7 @@ COIN_FACE:	system("cls");
 					cin>>overs_lost;
 					if	( overs_lost<0 || overs_lost>(N-over) )
 					{
-						MessageBox(0,"Error! Incorrect \"Overs Lost\" Entered! ", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Incorrect \"Overs Lost\" Entered! ", "Type 1", MB_OK );
 					}
 				}while( overs_lost<0 || overs_lost>(N-over) );
 
@@ -557,7 +562,7 @@ COIN_FACE:	system("cls");
 					cin>>S;
 					if	( S<0 )
 					{
-						MessageBox(0,"Error! Score can never be negative.", "Type 1", MB_OK );
+						//MessageBox(0,"Error! Score can never be negative.", "Type 1", MB_OK );
 					}
 				}while( S<0 );
 
@@ -577,7 +582,7 @@ COIN_FACE:	system("cls");
 		
 			else
 			{
-				MessageBox(0,"Error! Incorrect type ! ", "DLSM Case Selection", MB_OK );
+				//MessageBox(0,"Error! Incorrect type ! ", "DLSM Case Selection", MB_OK );
 				goto DSLM;
 			}
 
@@ -604,7 +609,7 @@ N_FROM_USER:
 				
 				if( N>50 || N<=0 )
 				{
-					MessageBox(0,"Incorrect Numbers of overs Entered! \n \"Overs=(1-50)\"", "Invalid Overs", MB_OK );
+					//MessageBox(0,"Incorrect Numbers of overs Entered! \n \"Overs=(1-50)\"", "Invalid Overs", MB_OK );
 					goto N_FROM_USER;
 				
 				}
@@ -617,7 +622,7 @@ N_FROM_USER:
 			}
 			else if (!(choice=="n" || choice=="N"))
 			{
-				MessageBox(0,"Incorrect Choice! ", "D/L Choice", MB_OK );
+				//MessageBox(0,"Incorrect Choice! ", "D/L Choice", MB_OK );
 				goto DSLM_AGAIN;
 			}
 
@@ -643,7 +648,7 @@ PROJECT_CHOICE:
 		
 		if (!( choice=="n" || choice=="N" || choice=="y" || choice=="Y" ))
 		{
-			MessageBox(0,"Incorrect Choice! ", "Project", MB_OK );
+			//MessageBox(0,"Incorrect Choice! ", "Project", MB_OK );
 			goto PROJECT_CHOICE;
 		}
 
@@ -656,7 +661,7 @@ PROJECT_CHOICE:
 
 	cout<<"\n\n \t\t\tEND OF PROJECT!!\n";
 
-	_getch();
+	getch();
 	return 0;
 	
 }				// end of body of function "main"

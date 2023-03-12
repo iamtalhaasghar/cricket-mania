@@ -14,7 +14,12 @@
 #include<fstream>
 #include<stdlib.h>
 #include<time.h>
-#include<Windows.h>
+//#include<Windows.h>
+
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -257,7 +262,7 @@ TOSS_DECISION:
 	{
 		// prompt an error message
 
-		MessageBox(0,"Error! Select \"ball\"or \"bat\"", "Coin Face", MB_OK );
+		//MessageBox(0,"Error! Select \"ball\"or \"bat\"", "Coin Face", MB_OK );
 		goto TOSS_DECISION;		// go to label "TOSS_DECISION" and get the decison again
 	}
 
@@ -306,12 +311,12 @@ void throw_coin(void)
 		
 		if(c%2==0)
 		{
-			Sleep(1500);
+			usleep(1500);
 			cout<<"\n\n\n\t"<<head<<endl;
 		}
 		else
 		{
-			Sleep(1500);
+			usleep(1500);
 			cout<<"\n\n\n\t"<<tail<<endl;
 		}
 		system("cls");	
